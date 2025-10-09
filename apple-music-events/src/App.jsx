@@ -8,12 +8,21 @@ export default function App() {
     useEffect(() => {
         const initMusicKit = async () => {
             try {
-                console.log("data1");
                 const res = await fetch("https://music-stats-7y55.vercel.app/api/apple-token");
-                console.log("data2");
-                const data = await res.json();
-                console.log("data");
-                console.log(data);
+                console.log("📦 Response status:", res.status);
+
+                const text = await res.text();
+                console.log("🧾 Raw response:", text);
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    console.error("❌ Response was not JSON!");
+                    return;
+                }
+                console.log("✅ Developer Token received:", data.token);
+
                 if (!data.token) throw new Error("No token returned from API");
 
                 const configureMusicKit = () => {
