@@ -1,7 +1,5 @@
 ﻿// generateToken.js
 import express from "express";
-import fs from "fs";
-import path from "path";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 
@@ -9,12 +7,13 @@ const app = express();
 app.use(cors());
 app.get("/api/apple-token", (req, res) => {
     try {
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+        res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
         // 🔑 Update these values with your info
         const teamId = "PC84YF525S";
         const keyId = "9B83MQYGSJ";
-
-       //const privateKey = fs.readFileSync("./AuthKey_9B83MQYGSJ.p8").toString();
-       // const privateKeyPath = path.join(process.cwd(), "server", "AuthKey_9B83MQYGSJ.p8");
         const privateKey = process.env.APPLE_PRIVATE_KEY.replace(/\\n/g, "\n");
         const token = jwt.sign(
             {
