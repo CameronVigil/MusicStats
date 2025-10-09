@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\apple-token-gen",
+    "\\public",
+    "\\src",
+    "\\src\\api"
   ],
+  "SelectedNode": "\\src\\api\\apple-token.js",
   "PreviewInSolutionExplorer": false
 }

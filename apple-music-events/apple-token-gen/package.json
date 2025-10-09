@@ -1,0 +1,17 @@
+{
+  "author": "",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  },
+  "description": "",
+  "devDependencies": {},
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "apple-token-gen",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
