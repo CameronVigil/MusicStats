@@ -15,16 +15,20 @@ app.get("/api/apple-token", (req, res) => {
         const teamId = "PC84YF525S";
         const keyId = "9B83MQYGSJ";
         const privateKey = process.env.APPLE_PRIVATE_KEY.replace(/\\n/g, "\n");
+        console.log("private key:" + privateKey);
         const token = jwt.sign(
             {
                 iss: teamId,
                 iat: Math.floor(Date.now() / 1000),
-                exp: Math.floor(Date.now() / 1000) + 15777000, // ~6 months
+                exp: Math.floor(Date.now() / 1000) + 15777000, // 6 months
             },
             privateKey,
             {
                 algorithm: "ES256",
-                keyid: keyId,
+                header: {
+                    alg: "ES256",
+                    kid: keyId,
+                },
             }
         );
         res.json({ token });

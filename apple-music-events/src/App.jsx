@@ -4,10 +4,10 @@ import './App.css'
 
 export default function App() {
     const [music, setMusic] = useState(null);
-
     useEffect(() => {
         const initMusicKit = async () => {
             try {
+                // Fetch developer token from backend
                 const res = await fetch("https://music-stats-7y55.vercel.app/api/apple-token");
                 console.log("📦 Response status:", res.status);
 
@@ -25,19 +25,15 @@ export default function App() {
 
                 if (!data.token) throw new Error("No token returned from API");
 
-                const configureMusicKit = () => {
-                    const musicInstance = window.MusicKit.configure({
-                        developerToken: data.token,
-                        app: { name: "MusicKit Demo", build: "1.0.0" },
-                    });
-                    setMusic(musicInstance);
-                };
+                window.MusicKit.configure({
+                    developerToken: data.token,
+                    app: { name: "MusicKit Demo", build: "1.0.0" },
+                });
 
-                if (window.MusicKit) {
-                    configureMusicKit();
-                } else {
-                    document.addEventListener("musickitloaded", configureMusicKit);
-                }
+                const instance = window.MusicKit.getInstance();
+                setMusic(instance);
+                console.log("Instance methods:", Object.keys(instance));
+                
             } catch (err) {
                 console.error("MusicKit init error:", err);
             }
@@ -47,6 +43,7 @@ export default function App() {
     }, []);
 
     const handleSignIn = async () => {
+        console.log("MusicKit instance created:" + music)
         if (!music) return console.error("MusicKit not ready");
         try {
             const userToken = await music.authorize();
@@ -60,7 +57,9 @@ export default function App() {
     return (
         <div style={{ padding: 50 }}>
             <h1>MusicKit Demo</h1>
-            <button onClick={handleSignIn}>Sign in with Apple Music!</button>
+            <button
+                onClick={handleSignIn}
+            >Sign in with Apple Music!</button>
         </div>
     )
 }
