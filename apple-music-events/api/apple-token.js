@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     try {
         console.error("test6");
         const teamId = "PC84YF525S";
-        const keyId = "9B83MQYGSJ";
+        const keyId = "X324HMKBA9";
         const privateKey = process.env.APPLE_KEY.replace(/\\n/g, "\n");
         const token = jwt.sign(
           {},        privateKey,
