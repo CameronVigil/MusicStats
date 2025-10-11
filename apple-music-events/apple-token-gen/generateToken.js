@@ -13,8 +13,9 @@ app.get("/api/apple-token", (req, res) => {
         res.setHeader("Content-Type", "application/json; charset=utf-8");
         // 🔑 Update these values with your info
         const teamId = "PC84YF525S";
-        const keyId = "9B83MQYGSJ";
-        const privateKey = process.env.APPLE_PRIVATE_KEY.replace(/\\n/g, "\n");
+        
+        const keyId = "X324HMKBA9";  // must match the key used to generate .p8
+        const privateKey = process.env.APPLE_KEY.replace(/\\n/g, "\n");
         console.log("private key:" + privateKey);
         const token = jwt.sign(
             {
@@ -32,7 +33,7 @@ app.get("/api/apple-token", (req, res) => {
             }
         );
         res.json({ token });
-        console.log("Your Apple Developer Token:\n", token);
+        console.log("Your Apple Token:\n", token);
     } catch (error) {
         console.error("❌ Token generation failed:", error);
         res.status(500).json({ error: "Token generation failed" });
