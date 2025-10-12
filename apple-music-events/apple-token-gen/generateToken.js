@@ -14,7 +14,7 @@ app.get("/api/apple-token", (req, res) => {
         // 🔑 Update these values with your info
         const teamId = "PC84YF525S";        
         const keyId = "X324HMKBA9";  // must match the key used to generate .p8
-        const privateKey = process.env.APPLE_KEY;
+        const privateKey = process.env.APPLE_KEY.replace(/\\n/g, "\n");
 
         console.log("private key:" + privateKey);
         const token = jwt.sign(
