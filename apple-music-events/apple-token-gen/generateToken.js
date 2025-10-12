@@ -12,10 +12,10 @@ app.get("/api/apple-token", (req, res) => {
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
         res.setHeader("Content-Type", "application/json; charset=utf-8");
         // 🔑 Update these values with your info
-        const teamId = "PC84YF525S";
-        
+        const teamId = "PC84YF525S";        
         const keyId = "X324HMKBA9";  // must match the key used to generate .p8
-        const privateKey = process.env.APPLE_KEY.replace(/\\n/g, "\n");
+        const privateKey = process.env.APPLE_KEY;
+
         console.log("private key:" + privateKey);
         const token = jwt.sign(
             {
