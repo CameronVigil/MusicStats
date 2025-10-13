@@ -7,10 +7,11 @@ const app = express();
 app.use(cors());
 app.get("/api/apple-token", (req, res) => {
     try {
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
         res.setHeader("Content-Type", "application/json; charset=utf-8");
+
         // 🔑 Update these values with your info
         const teamId = "PC84YF525S";        
         const keyId = "X324HMKBA9";  // must match the key used to generate .p8
