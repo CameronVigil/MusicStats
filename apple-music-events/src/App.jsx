@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
 import  fetchRecentTracks  from "/api/music-summaries" ;
 import { startIdleTimer } from "./utils/idleTimer.js";
+import './index.css';
 
 export default function App() {
   const [ready, setReady] = useState(false);
