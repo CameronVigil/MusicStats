@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
-import fetchMusicSummaries from "/api/music-summaries" ;
+import  fetchRecentTracks  from "/api/music-summaries" ;
 import { startIdleTimer } from "./utils/idleTimer.js";
 
 export default function App() {
@@ -7,20 +7,21 @@ export default function App() {
   const [signedIn, setsignedIn] = useState(false);
   const developerToken = useRef(null);
   const userToken = useRef(null);
+  const idleTime = 2;
 
   useEffect(() => {
     const initMusicKit = async () => {
       try {
-        console.log("Starting MusicKit init");
+        console.log("Starting MusicKit initialization.");
 
         // Ensure SDK is loaded
         if (!window.MusicKit) {
-          console.log("Loading MusicKit script");
+          console.log("Loading MusicKit script.");
           
 
           await new Promise((resolve) => {
             document.addEventListener("musickitloaded", () => {
-              console.log("musickitloaded event fired");
+              console.log("musickitloaded event fired.");
               resolve();
             });
           });
@@ -37,17 +38,17 @@ export default function App() {
         if (document.requestStorageAccess) {
             try {
                 await document.requestStorageAccess();
-                console.log("Storage access granted");
+                console.log("Storage access granted.");
             } catch (err) {
-                console.warn("Storage access denied", err);
+                console.warn("Storage access denied.", err);
             }
         }
         if (document.requestStorageAccess) {
             try {
                 await document.requestStorageAccess();
-                console.log("Storage access granted");
+                console.log("Storage access granted.");
             } catch (err) {
-                console.warn("Storage access denied", err);
+                console.warn("Storage access denied.", err);
             }
         }
         // Configure MusicKit
@@ -56,10 +57,12 @@ export default function App() {
           app: { name: "MusicKit Demo", build: "1.0.0" },
         });
         
-        console.log("MusicKit instance:", instance);
-
-        if (instance) {
-          setReady(true);
+        if (!instance) {
+            console.error("MusicKit failed to initialize.");
+            return;
+        } else {
+            console.log("MusicKit instance created.");
+            setReady(true);
         }
       } catch (err) {
         console.error("MusicKit init error:", err);
@@ -67,17 +70,19 @@ export default function App() {
     };
 
     // start idle timer for x minutes
-    startIdleTimer(handleSessionExpire, 2);
+    startIdleTimer(handleSessionExpire, idleTime);
     initMusicKit();
   }, []);
 
   const handleSignIn = async () => {
     console.log("Sign-in");
     const instance = window.MusicKit?.getInstance();
-    console.log("MusicKit instance:", instance);
+    
     if (!instance) {
-        console.error("MusicKit failed to initialize");
+        console.error("MusicKit failed to initialize.");
         return;
+    } else {
+        console.log("MusicKit instance created.");
     }
 
     try {
@@ -89,14 +94,11 @@ export default function App() {
     }
   };
 
-  const getTopArtists = async () => {
-    console.log("Developer token:", developerToken);
-
+  const getRecentTracks = async () => {
     try {
-        console.log("Developer token:", developerToken);
-        console.log("User token:", userToken);
-
-        const summaries = await fetchMusicSummaries(developerToken, userToken);
+        console.log("Developer token:", developerToken.current);
+        console.log("User token:", userToken.current);
+        const summaries = await fetchRecentTracks(developerToken.current, userToken.current);
         console.log("Summaries data:", summaries);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
@@ -128,7 +130,7 @@ export default function App() {
           <button onClick={handleSignIn} disabled={!ready} hidden={ signedIn }>
         {ready ? "Sign in with Apple Music!" : "Loading..."}
           </button>
-          <button onClick={getTopArtists} hidden={!signedIn}>
+          <button onClick={getRecentTracks} hidden={!signedIn}>
               {"Get Top Artists" }
           </button>
     </div>

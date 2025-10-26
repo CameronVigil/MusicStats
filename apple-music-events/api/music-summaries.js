@@ -1,8 +1,10 @@
 ﻿// music-summaries.js
 
-async function fetchMusicSummaries(developerToken, userToken) {
+export default async function fetchRecentTracks(developerToken, userToken) {
     try {
-        const res = await fetch("https://api.music.apple.com/v1/me/music-summaries", {
+        console.log("Developer token:", developerToken);
+        console.log("User token:", userToken);
+        const res = await fetch(`https://api.music.apple.com/v1/me/recent/played/tracks` , {
             headers: {
                 Authorization: `Bearer ${developerToken}`,
                 "Music-User-Token": userToken,
@@ -16,5 +18,4 @@ async function fetchMusicSummaries(developerToken, userToken) {
     } catch (err) {
         console.error("Failed to fetch summaries:", err);
     }
-}
-export default fetchMusicSummaries;
+};
