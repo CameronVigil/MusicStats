@@ -3,11 +3,8 @@ import React from "react";
 
 export default async function fetchHeavyRotation(developerToken, userToken) {
     try {
-        console.log("Developer token:", developerToken);
-        console.log("User token:", userToken);
-
         const res = await fetch(
-            `https://api.music.apple.com/v1/me/history/heavy-rotation?limit=1`,
+            `https://api.music.apple.com/v1/me/history/heavy-rotation?limit=10`,
             {
                 headers: {
                     Authorization: `Bearer ${developerToken}`,
@@ -19,71 +16,79 @@ export default async function fetchHeavyRotation(developerToken, userToken) {
         if (!res.ok) throw new Error(`Apple API Error: ${res.status}`);
         const data = await res.json();
         const items = data.data || [];
-
+        console.log(items);
         return (
-            <div className="heavy-rotation-container">
+            <div className="heavy-rotation">
                 {items.map((item) => {
-                    const attr = item.attributes || {};
-                    const artworkUrl =
-                        attr.artwork?.url
-                            ?.replace("{w}", "300")
-                            ?.replace("{h}", "300") ||
-                        "https://via.placeholder.com/300x300?text=No+Art";
+                    const attr = item.attributes;
+                    if (!attr) return null;
+                    console.log("Attributes:" + item.attributes);
+                    const artworkUrl = attr.artwork?.url
+                        ?.replace("{w}", "300")
+                        ?.replace("{h}", "300");
 
-                    return (
-                        <div key={item.id} className="album-card">
-                            <img
-                                src={artworkUrl}
-                                alt={attr.name || "Unknown Album"}
-                                className="album-art"
-                                width="150"
-                                height="150"
-                            />
-
-                            <div className="album-info">
-                                <h2 className="album-title">{attr.name || "Untitled Album"}</h2>
-                                <p className="artist-name">{attr.artistName || "Unknown Artist"}</p>
-
-                                <ul className="album-details">
-                                    {attr.genreNames && (
-                                        <li>
-                                            <strong>Genre:</strong> {attr.genreNames.join(", ")}
-                                        </li>
-                                    )}
-                                    {attr.releaseDate && (
-                                        <li>
-                                            <strong>Release Date:</strong> {attr.releaseDate}
-                                        </li>
-                                    )}
-                                    {attr.recordLabel && (
-                                        <li>
-                                            <strong>Label:</strong> {attr.recordLabel}
-                                        </li>
-                                    )}
-                                    {attr.trackCount && (
-                                        <li>
-                                            <strong>Tracks:</strong> {attr.trackCount}
-                                        </li>
-                                    )}
-                                </ul>
-
-                                {attr.editorialNotes?.short && (
-                                    <p className="album-note">“{attr.editorialNotes.short}”</p>
+                    // Determine if it's an album or playlist
+                    const isPlaylist = item.type === "library-playlists";
+                    const typeLabel = isPlaylist ? "Playlist" : "Album";
+                    if (!isPlaylist){
+                        return (
+                            <div key={item.id} className="album-card">
+                                {artworkUrl && (
+                                    <img
+                                        src={artworkUrl}
+                                        alt={attr.name || "Artwork"}
+                                        className="album-art"
+                                    />
                                 )}
 
-                                {attr.url && (
-                                    <a
-                                        href={attr.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="album-link"
-                                    >
-                                        View on Apple Music →
-                                    </a>
-                                )}
+                                <div className="album-info">
+                                    <h2 className="album-title">{attr.name}</h2>
+                                    <p className="artist-name">
+                                        {isPlaylist
+                                            ? attr.curatorName || "Apple Music"
+                                            : attr.artistName || "Unknown Artist"}
+                                    </p>
+
+                                    <ul className="album-details">
+                                        <li><strong>Type:</strong> {typeLabel}</li>
+
+                                        {attr.genreNames?.length > 0 && (
+                                            <li>
+                                                <strong>Genre:</strong> {attr.genreNames.join(", ")}
+                                            </li>
+                                        )}
+                                        {attr.releaseDate && (
+                                            <li>
+                                                <strong>Release Date:</strong> {attr.releaseDate}</li>
+                                        )}
+                                        {attr.recordLabel && (
+                                            <li>
+                                                <strong>Label:</strong> {attr.recordLabel}</li>
+                                        )}
+                                        {attr.trackCount && (
+                                            <li>
+                                                <strong>Tracks:</strong> {attr.trackCount}</li>
+                                        )}
+                                    </ul>
+
+                                    {attr.editorialNotes?.short && (
+                                        <p className="album-note">“{attr.editorialNotes.short}”</p>
+                                    )}
+
+                                    {attr.url && (
+                                        <a
+                                            href={attr.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="album-link"
+                                        >
+                                            View on Apple Music →
+                                        </a>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    );
+                        )
+                    };
                 })}
             </div>
         );
