@@ -1,4 +1,4 @@
-﻿// music-summaries.js
+﻿// recently-played-tracks.js
 
 export default async function fetchRecentTracks(developerToken, userToken) {
     try {

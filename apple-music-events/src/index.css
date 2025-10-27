@@ -31,10 +31,122 @@ button {
     transition: background 0.2s ease;
 }
 
-    button:hover {
-        background-color: #444;
-    }
+button:hover {
+    background-color: #444;
+}
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block;
+}
+
 
 div {
     text-align: center;
 }
+
+
+
+//Heavy Rotation
+.heavyRotation {
+    background-color: #f0f0f0; /* light grey like copy paper */
+    font-family: "Athabasca Condensed ExtraBold", "Arial Narrow", sans-serif;
+    color: #222;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.heavyRotation h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.heavyRotation ul {
+    list-style: none;
+    padding: 0;
+}
+
+.heavyRotation li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.heavy-rotation-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px;
+    background-color: #f4f4f2; /* light gray paper look */
+    font-family: "Athabasca Condensed", sans-serif;
+    color: #1e1e1e;
+}
+
+.album-card {
+    display: flex;
+    align-items: flex-start;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .album-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+.album-art {
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.album-info {
+    flex: 1;
+}
+
+.album-title {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.artist-name {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 6px 0 10px;
+}
+
+.album-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+    .album-details li {
+        margin-bottom: 4px;
+    }
+
+.album-note {
+    margin-top: 10px;
+    font-style: italic;
+    color: #444;
+}
+
+.album-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #0070c9;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .album-link:hover {
+        text-decoration: underline;
+    }
