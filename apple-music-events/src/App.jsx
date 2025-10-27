@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
-import  fetchRecentTracks  from "/api/music-summaries" ;
+import fetchRecentTracks from "/api/recently-played-tracks";
+import fetchHeavyRotation from "/api/heavy-rotation";
 import { startIdleTimer } from "./utils/idleTimer.js";
 import './index.css';
 
@@ -9,6 +10,7 @@ export default function App() {
   const developerToken = useRef(null);
   const userToken = useRef(null);
   const idleTime = 2;
+  const [heavyRotation, setHeavyRotation] = useState([]);
 
   useEffect(() => {
     const initMusicKit = async () => {
@@ -69,7 +71,6 @@ export default function App() {
         console.error("MusicKit init error:", err);
       }
     };
-
     // start idle timer for x minutes
     startIdleTimer(handleSessionExpire, idleTime);
     initMusicKit();
@@ -97,13 +98,21 @@ export default function App() {
 
   const getRecentTracks = async () => {
     try {
-        console.log("Developer token:", developerToken.current);
-        console.log("User token:", userToken.current);
         const summaries = await fetchRecentTracks(developerToken.current, userToken.current);
         console.log("Summaries data:", summaries);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
     }
+    };
+
+  const getHeavyRotation = async () => {
+        try {
+            const summaries = await fetchHeavyRotation(developerToken.current, userToken.current);
+            console.log("Summaries data:", summaries);
+            setHeavyRotation(summaries);
+        } catch (err) {
+            console.error("Sign-in or fetch failed:", err);
+        }
   };
 
   function handleSessionExpire() {
@@ -128,12 +137,30 @@ export default function App() {
   return (
     <div style={{ padding: 50 }}>
       <h1>Music Stats</h1>
-          <button onClick={handleSignIn} disabled={!ready} hidden={ signedIn }>
-        {ready ? "Sign in with Apple Music!" : "Loading..."}
+          <button
+              onClick={handleSignIn}
+              className={!signedIn ? "visible" : "hidden"}
+          >
+            {ready ? "Sign in with Apple Music" : "Loading..."}
           </button>
-          <button onClick={getRecentTracks} hidden={!signedIn}>
-              {"Get Top Artists" }
+          <button
+              onClick={getRecentTracks}
+              className={signedIn ? "visible" : "hidden"}
+          >
+            {"Recently Played Tracks" }
           </button>
+          <button
+              onClick={getHeavyRotation}
+              className={signedIn ? "visible" : "hidden"}
+          >
+              {"Heavy Rotation"}
+          </button>
+          <h1
+              className={signedIn ? "heavyRotation" : "hidden"}
+          >
+              { heavyRotation }
+          </h1>
+          
     </div>
   );
 }
