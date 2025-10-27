@@ -9,7 +9,7 @@ export default function App() {
   const [signedIn, setsignedIn] = useState(false);
   const developerToken = useRef(null);
   const userToken = useRef(null);
-  const idleTime = 2;
+  const idleTime = 20;
   const [heavyRotation, setHeavyRotation] = useState([]);
 
   useEffect(() => {
