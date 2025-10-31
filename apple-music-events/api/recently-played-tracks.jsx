@@ -1,4 +1,4 @@
-﻿// recently-played-tracks.js
+﻿// recently-played-tracks.jsx
 
 export default async function fetchRecentTracks(developerToken, userToken) {
     try {

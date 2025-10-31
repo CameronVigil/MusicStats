@@ -51,14 +51,13 @@ div {
 
 //Heavy Rotation
 .heavyRotation {
-    background-color: #f0f0f0; /* light grey like copy paper */
     font-family: "Athabasca Condensed ExtraBold", "Arial Narrow", sans-serif;
-    color: #222;
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+    max-width: 400px;
     margin: 2rem auto;
+    justify-content: center;
 }
 
 .heavyRotation h2 {
@@ -77,29 +76,58 @@ div {
 }
 
 .heavy-rotation-container {
-    display: flex;
     flex-direction: column;
     gap: 24px;
     padding: 30px;
-    background-color: #f4f4f2; /* light gray paper look */
     font-family: "Athabasca Condensed", sans-serif;
-    color: #1e1e1e;
+    color: #100e0ed6;
+    
+    justify-content: center;
+    min-height: 100vh; /* ensures full page height */
+    width: 100%; /* ensures full page width */
+    box-sizing: border-box; /* keeps padding from breaking layout */
 }
 
 .album-card {
+    position: relative;
     display: flex;
-    align-items: flex-start;
-    background: white;
+    align-items: center;
     border-radius: 12px;
+    overflow: hidden; /* important for rounded edges */
+    opacity: 0.9;
+    background: #f0f0f0; /* base color */
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     padding: 20px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+    /* gradient overlay (starts hidden) */
+    .album-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient( ellipse at top, rgba(240,240,240,0.9) 0%, rgba(240,240,240,0.6) 40%, transparent 100% );
+        opacity: 0;
+        transition: opacity 0.8s ease;
+        z-index: 0;
+    }
 
     .album-card:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
+
+        .album-card:hover::before {
+            opacity: 1; /* fade the gradient in smoothly */
+        }
+
+    /* keep inner content above the overlay */
+    .album-card > * {
+        position: relative;
+        z-index: 1;
+    }
+
 
 .album-art {
     border-radius: 8px;
@@ -129,9 +157,9 @@ div {
     font-size: 0.95rem;
 }
 
-    .album-details li {
-        margin-bottom: 4px;
-    }
+.album-details li {
+    margin-bottom: 4px;
+}
 
 .album-note {
     margin-top: 10px;
@@ -142,11 +170,12 @@ div {
 .album-link {
     display: inline-block;
     margin-top: 12px;
-    color: #0070c9;
+    color: black;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400;
+    font-size:16px;
 }
 
-    .album-link:hover {
-        text-decoration: underline;
-    }
+.album-link:hover {
+    text-decoration: underline;
+}
