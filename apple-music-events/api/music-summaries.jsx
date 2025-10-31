@@ -17,17 +17,14 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { userToken } = req.query;
+        const { userToken, developerToken } = req.query;
 
-        if (!userToken) {
+        if (!userToken || developerToken) {
             return res.status(400).json({ error: "Missing Music-User-Token" });
         }
 
-        // Your developer token should be stored in environment variables
-        const developerToken = process.env.DEV_TOKEN;
-
         const appleRes = await fetch(
-            `https://amp-api.music.apple.com/v1/me/music-summaries/search?l=en-us&period=year&fields[music-summaries]=period,year`,
+            `https://api.music.apple.com/v1/me/music-summaries/search?l=en-us&period=year&fields[music-summaries]=period,year`,
             {
                 headers: {
                     Authorization: `Bearer ${developerToken}`,
