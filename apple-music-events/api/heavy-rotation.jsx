@@ -1,4 +1,4 @@
-﻿// heavy-rotation.js
+﻿// heavy-rotation.jsx
 import React from "react";
 
 export default async function fetchHeavyRotation(developerToken, userToken) {
@@ -50,24 +50,24 @@ export default async function fetchHeavyRotation(developerToken, userToken) {
                                     </p>
 
                                     <ul className="album-details">
-                                        <li><strong>Type:</strong> {typeLabel}</li>
+                                        <li> {typeLabel}</li>
 
                                         {attr.genreNames?.length > 0 && (
                                             <li>
-                                                <strong>Genre:</strong> {attr.genreNames.join(", ")}
+                                                {attr.genreNames.join(", ")}
                                             </li>
                                         )}
                                         {attr.releaseDate && (
                                             <li>
-                                                <strong>Release Date:</strong> {attr.releaseDate}</li>
+                                                 {attr.releaseDate}</li>
                                         )}
                                         {attr.recordLabel && (
                                             <li>
-                                                <strong>Label:</strong> {attr.recordLabel}</li>
+                                                {attr.recordLabel}</li>
                                         )}
                                         {attr.trackCount && (
                                             <li>
-                                                <strong>Tracks:</strong> {attr.trackCount}</li>
+                                                {attr.trackCount}<strong> Tracks</strong> </li>
                                         )}
                                     </ul>
 

@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
 import fetchRecentTracks from "/api/recently-played-tracks";
 import fetchHeavyRotation from "/api/heavy-rotation";
+import fetchMusicSummaries from "/api/music-summaries";
 import { startIdleTimer } from "./utils/idleTimer.js";
 import './index.css';
 
@@ -10,7 +11,7 @@ export default function App() {
   const developerToken = useRef(null);
   const userToken = useRef(null);
   const idleTime = 20;
-  const [heavyRotation, setHeavyRotation] = useState([]);
+  const [DisplayData, setDisplayData] = useState([]);
 
   useEffect(() => {
     const initMusicKit = async () => {
@@ -75,7 +76,24 @@ export default function App() {
     startIdleTimer(handleSessionExpire, idleTime);
     initMusicKit();
   }, []);
+  function handleSessionExpire() {
+    // Clear cookies
+    document.cookie = "userToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.cookie = "developerToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    console.log("Cleared cookies due to inactivity");
 
+    // Optional: revoke Apple Music authorization if supported
+    if (window.MusicKit && window.MusicKit.getInstance().isAuthorized) {
+        window.MusicKit.getInstance().unauthorize().then(() => {
+            console.log("Apple Music authorization revoked");
+            alert("Session expired. Please sign in again.");
+            window.location.reload();
+        });
+    } else {
+        alert("Session expired. Please sign in again.");
+        window.location.reload();
+    }
+  };
   const handleSignIn = async () => {
     console.log("Sign-in");
     const instance = window.MusicKit?.getInstance();
@@ -103,36 +121,33 @@ export default function App() {
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
     }
-    };
+  };
 
   const getHeavyRotation = async () => {
-        try {
-            const summaries = await fetchHeavyRotation(developerToken.current, userToken.current);
-            console.log("Summaries data:", summaries);
-            setHeavyRotation(summaries);
-        } catch (err) {
-            console.error("Sign-in or fetch failed:", err);
-        }
-  };
-
-  function handleSessionExpire() {
-    // Clear cookies
-    document.cookie = "userToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.cookie = "developerToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    console.log("Cleared cookies due to inactivity");
-
-    // Optional: revoke Apple Music authorization if supported
-    if (window.MusicKit && window.MusicKit.getInstance().isAuthorized) {
-        window.MusicKit.getInstance().unauthorize().then(() => {
-            console.log("Apple Music authorization revoked");
-            alert("Session expired. Please sign in again.");
-            window.location.reload();
-        });
-    } else {
-        alert("Session expired. Please sign in again.");
-        window.location.reload();
+    try {
+        const data = await fetchHeavyRotation(developerToken.current, userToken.current);
+        console.log("Summaries data:", data);
+        setDisplayData(data);
+    } catch (err) {
+        console.error("Sign-in or fetch failed:", err);
     }
   };
+
+  const getMusicSummaries = async () => {
+    try {
+        const userToken = userToken.current;
+        const res = await fetch(
+            `https://music-stats-7y55.vercel.app/api/heavy-rotation?userToken=${userToken}`
+        );
+        const data = await res.json();
+        console.log(data);
+
+        setDisplayData(data);
+    } catch (err) {
+        console.error("Sign-in or fetch failed:", err);
+    }
+  };
+
 
   return (
     <div style={{ padding: 50 }}>
@@ -155,10 +170,16 @@ export default function App() {
           >
               {"Heavy Rotation"}
           </button>
+          <button
+              onClick={getMusicSummaries}
+              className={signedIn ? "visible" : "hidden"}
+          >
+              {"Music Summaries"}
+          </button>
           <h1
               className={signedIn ? "heavyRotation" : "hidden"}
           >
-              { heavyRotation }
+              { DisplayData }
           </h1>
           
     </div>
