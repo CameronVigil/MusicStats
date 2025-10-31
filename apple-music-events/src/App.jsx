@@ -137,7 +137,7 @@ export default function App() {
     try {
         const userToken = userToken.current;
         const res = await fetch(
-            `https://music-stats-7y55.vercel.app/api/heavy-rotation?userToken=${userToken}`
+            `https://music-stats-7y55.vercel.app/api/heavy-rotation?developerToken=${developerToken}&userToken=${userToken}`
         );
         const data = await res.json();
         console.log(data);
