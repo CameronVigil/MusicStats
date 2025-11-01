@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:apple-music-events\\api\\music-summaries.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\heavy-rotation.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:apple-music-events\\api\\heavy-rotation.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\apple-token.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:apple-music-events\\api\\apple-token.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\src\\App.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:apple-music-events\\src\\App.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -22,17 +30,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "apple-token.js",
+              "DocumentMoniker": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\apple-token.js",
+              "RelativeDocumentMoniker": "apple-music-events\\api\\apple-token.js",
+              "ToolTip": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\apple-token.js",
+              "RelativeToolTip": "apple-music-events\\api\\apple-token.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-01T00:53:04.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "heavy-rotation.jsx",
+              "DocumentMoniker": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\heavy-rotation.jsx",
+              "RelativeDocumentMoniker": "apple-music-events\\api\\heavy-rotation.jsx",
+              "ToolTip": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\heavy-rotation.jsx",
+              "RelativeToolTip": "apple-music-events\\api\\heavy-rotation.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-10-31T15:02:03.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "recently-played-tracks.jsx",
               "DocumentMoniker": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\recently-played-tracks.jsx",
               "RelativeDocumentMoniker": "apple-music-events\\api\\recently-played-tracks.jsx",
               "ToolTip": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\recently-played-tracks.jsx",
               "RelativeToolTip": "apple-music-events\\api\\recently-played-tracks.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-10-31T14:18:55.734Z",
               "EditorCaption": ""
@@ -45,20 +79,20 @@
               "RelativeDocumentMoniker": "apple-music-events\\api\\music-summaries.jsx",
               "ToolTip": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\api\\music-summaries.jsx",
               "RelativeToolTip": "apple-music-events\\api\\music-summaries.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAABwAgAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-10-28T01:25:07.144Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\src\\App.jsx",
               "RelativeDocumentMoniker": "apple-music-events\\src\\App.jsx",
               "ToolTip": "C:\\src\\New folder (2)\\MusicStats\\apple-music-events\\src\\App.jsx",
               "RelativeToolTip": "apple-music-events\\src\\App.jsx",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAgwI0AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAgwIsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-10-25T03:56:24.428Z",
               "EditorCaption": ""
