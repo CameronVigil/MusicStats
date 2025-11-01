@@ -134,11 +134,12 @@ export default function App() {
   };
 
   const getMusicSummaries = async () => {
-    try {
-        const userToken = userToken.current;
+      try {
+          console.log("Retrieving summaries from API.");
         const res = await fetch(
-            `https://music-stats-7y55.vercel.app/api/heavy-rotation?developerToken=${developerToken}&userToken=${userToken}`
-        );
+            "/api/music-summaries?developerToken=" + developerToken.current +"&userToken="+userToken.current
+          );
+          console.log("Retrieved summaries from API.");
         const data = await res.json();
         console.log(data);
 
