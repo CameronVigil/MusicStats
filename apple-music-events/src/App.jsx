@@ -10,7 +10,7 @@ export default function App() {
   const [signedIn, setsignedIn] = useState(false);
   const developerToken = useRef(null);
   const userToken = useRef(null);
-  const idleTime = 20;
+  const idleTime = 30;
   const [DisplayData, setDisplayData] = useState([]);
 
   useEffect(() => {
@@ -140,10 +140,9 @@ export default function App() {
             "/api/music-summaries?developerToken=" + developerToken.current +"&userToken="+userToken.current
           );
           console.log("Retrieved summaries from API.");
-        const data = await res.json();
-        console.log(data);
-
-        setDisplayData(data);
+          const data = await res.json();
+          console.log("Summaries data:", data);
+          setDisplayData(data.data);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
     }
