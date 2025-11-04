@@ -3,10 +3,8 @@
     "",
     "\\apple-music-events",
     "\\apple-music-events\\api",
-    "\\apple-music-events\\apple-token-gen",
-    "\\apple-music-events\\src",
-    "\\apple-music-events\\src\\utils"
+    "\\apple-music-events\\src"
   ],
-  "SelectedNode": "\\apple-music-events\\api\\apple-token.js",
+  "SelectedNode": "\\apple-music-events\\src\\App.jsx",
   "PreviewInSolutionExplorer": false
 }

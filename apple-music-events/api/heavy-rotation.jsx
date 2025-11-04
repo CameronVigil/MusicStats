@@ -4,7 +4,7 @@ import React from "react";
 export default async function fetchHeavyRotation(developerToken, userToken) {
     try {
         const res = await fetch(
-            `https://api.music.apple.com/v1/me/history/heavy-rotation?limit=10`,
+            `https://api.music.apple.com/v1/me/history/heavy-rotation`,
             {
                 headers: {
                     Authorization: `Bearer ${developerToken}`,

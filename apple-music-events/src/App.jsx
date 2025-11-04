@@ -115,18 +115,21 @@ export default function App() {
   };
 
   const getRecentTracks = async () => {
-    try {
-        const summaries = await fetchRecentTracks(developerToken.current, userToken.current);
-        console.log("Summaries data:", summaries);
+      try {
+          setDisplayData(null);
+          const data = await fetchRecentTracks(developerToken.current, userToken.current);
+          console.log("Recent tracks data:", data);
+          setDisplayData(data);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
     }
   };
 
   const getHeavyRotation = async () => {
-    try {
+      try {
+          setDisplayData(null);
         const data = await fetchHeavyRotation(developerToken.current, userToken.current);
-        console.log("Summaries data:", data);
+        console.log("Heavy rotation data:", data);
         setDisplayData(data);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
@@ -135,9 +138,10 @@ export default function App() {
 
   const getMusicSummaries = async () => {
       try {
-          console.log("Retrieving summaries from API.");
+        setDisplayData(null);
+        console.log("Retrieving summaries from API.");
         const res = await fetch(
-            "/api/music-summaries?developerToken=" + developerToken.current +"&userToken="+userToken.current
+            "https://music-stats-7y55.vercel.app/api/music-summaries?developerToken=" + developerToken.current +"&userToken="+userToken.current
           );
           console.log("Retrieved summaries from API.");
           const data = await res.json();
