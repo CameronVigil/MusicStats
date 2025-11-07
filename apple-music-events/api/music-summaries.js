@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     try {
         const { userToken, developerToken } = req.query;
 
-        if (!userToken || developerToken) {
+        if (!userToken || !developerToken) {
             return res.status(400).json({ error: "Missing Music-User-Token" });
         }
         console.log("Retrieving summaries.");
@@ -32,11 +32,6 @@ export default async function handler(req, res) {
         );
         console.log("Retrieved summaries.");
         const data = await appleRes.data;
-
-        // Send CORS headers for the actual response
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
         res.status(200).json(data);
     } catch (err) {
