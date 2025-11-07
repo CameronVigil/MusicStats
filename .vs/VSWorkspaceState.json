@@ -3,8 +3,8 @@
     "",
     "\\apple-music-events",
     "\\apple-music-events\\api",
-    "\\apple-music-events\\src"
+    "\\apple-music-events\\src",
+    "\\apple-music-events\\src\\utils"
   ],
-  "SelectedNode": "\\apple-music-events\\src\\App.jsx",
   "PreviewInSolutionExplorer": false
 }
