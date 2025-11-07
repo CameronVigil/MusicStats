@@ -2,7 +2,7 @@
 import fetchRecentTracks from "/api/recently-played-tracks";
 import fetchHeavyRotation from "/api/heavy-rotation";
 import fetchMusicSummaries from "/api/music-summaries";
-import { startIdleTimer } from "./utils/idleTimer.js";
+import { startIdleTimer } from "./utils/idle-timer.js";
 import './index.css';
 
 
