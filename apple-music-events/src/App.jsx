@@ -149,14 +149,13 @@ export default function App() {
   const getMusicSummaries = async () => {
       try {
         setDisplayData(null);
-        console.log("Retrieving summaries from API.");
-        const res = await fetch(
+          console.log("Retrieving summaries from API.");
+          const res = await fetch(
             "https://music-stats-7y55.vercel.app/api/music-summaries?developerToken=" + developerToken.current +"&userToken="+userToken.current
-        );
+          );
           console.log("Retrieved summaries from API.");
-          const data = await res.json();
-          console.log("Summaries data:", data);
-          setDisplayData(data.data);
+          console.log("Summaries data:", res);
+          setDisplayData(res.data);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
     }

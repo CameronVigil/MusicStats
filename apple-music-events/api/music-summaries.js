@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         }
         console.log("Retrieving summaries.");
         const appleRes = await fetch(
-            `https://api.music.apple.com/v1/me/music-summaries/search?l=en-us&year=2025&period=month`,
+            `https://api.music.apple.com/v1/me/music-summaries/month-2025-10`,
             {
                 headers: {
                     Authorization: `Bearer ${developerToken}`,
@@ -31,9 +31,7 @@ export default async function handler(req, res) {
             }
         );
         console.log("Retrieved summaries.");
-        const data = await appleRes.data;
-
-        res.status(200).json(data);
+        return appleRes;
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
