@@ -15,19 +15,7 @@ features
 -  **Modern React frontend** for a clean, responsive interface  
 
 
-future enhancements
-
- - Display top artists, albums, and genres in a dashboard
-
- - Add a Google Maps view of nearby concerts for favorite artists
-
- - AI-simulated user profiles for testing analytics and recommendations
-
- - Integrate with FileMaker or another database for persistent user storage
- - **AI Simulation Mode** — simulate users and their music activity  
-
-
-
+<img width="1260" height="544" alt="image" src="https://github.com/user-attachments/assets/85ea193e-f7ee-4fd3-963a-b2852c974285" />
 
 
 thanks for checking out my app, always open to feedback! :)
