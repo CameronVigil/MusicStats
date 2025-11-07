@@ -86,8 +86,10 @@ export default function SplitFlapBoard({ items, showAlbumArt = true }) {
                     const attr = item.attributes;
                     if (!attr) return null;
 
+
+                    const artist = (item.type == "library-playlists" ? "PLAYLIST" : (attr.artistName || "Unknown").toUpperCase());
+                    
                     const title = (attr.name || "Untitled").toUpperCase();
-                    const artist = (attr.artistName || "Unknown").toUpperCase();
                     const artwork = attr.artwork?.url
                         ?.replace("{w}", "100")
                         ?.replace("{h}", "100");

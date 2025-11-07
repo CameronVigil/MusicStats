@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
 import fetchRecentTracks from "/api/recently-played-tracks";
 import fetchHeavyRotation from "/api/heavy-rotation";
+import fetchMusicSummaries from "/api/music-summaries";
 import { startIdleTimer } from "./utils/idle-timer.js";
 import './index.css';
 
@@ -150,9 +151,7 @@ export default function App() {
       try {
         setDisplayData(null);
           console.log("Retrieving summaries from API.");
-          const res = await fetch(
-            "https://music-stats-7y55.vercel.app/api/music-summaries?developerToken=" + developerToken.current +"&userToken="+userToken.current
-          );
+          const res = await fetchMusicSummaries(developerToken.current, userToken.current);
           console.log("Retrieved summaries from API.");
           console.log("Summaries data:", res);
           setDisplayData(res.data);
@@ -173,10 +172,10 @@ export default function App() {
 
             // Occasionally show music note (every 10 seconds, 80% chance)
             const noteInterval = setInterval(() => {
-                if (Math.random() < 0.8) {
+                //if (Math.random() < 0.9) {
                     setShowMusicNote(true);
-                    setTimeout(() => setShowMusicNote(false), 2000); // Show for 2 seconds
-                }
+                    setTimeout(() => setShowMusicNote(false), 10); // Show for 2 seconds
+                //}
             }, 10000);
 
             return () => {
@@ -188,11 +187,11 @@ export default function App() {
         return (
             <span style={{
                 display: 'inline-block',
-                width: '0.8em', // Fixed width instead of minWidth
+                width: '0.85em', // Fixed width instead of minWidth
                 opacity: showPeriod ? 1 : 0,
                 transition: 'opacity 0.1s ease',
-                fontSize: showMusicNote ? '0.5em' : '0.6em',
-                filter: showMusicNote ? 'grayscale(100%) brightness(0)' : 'none',
+                fontSize: '0.6em',
+                filter: 'grayscale(100%) brightness(0)',
                 verticalAlign: 'baseline',
                 lineHeight: 1
             }}>
@@ -209,7 +208,7 @@ export default function App() {
           <button
               onClick={handleRefresh}
               className={"title"}
-          >Music Stats<BlinkingPeriod /></button>
+          >music stats<BlinkingPeriod /></button>
           
           <button
               onClick={handleSignIn}
@@ -222,19 +221,19 @@ export default function App() {
                   onClick={getRecentTracks}
                   className={signedIn ? "visible" : "hidden"}
               >
-                {"Recently Played Tracks" }
+                {"recently played tracks" }
               </button>
               <button
                   onClick={getHeavyRotation}
                   className={signedIn ? "visible" : "hidden"}
               >
-                  {"Heavy Rotation"}
+                  {"heavy rotation"}
               </button>
               <button
                   onClick={getMusicSummaries}
                   className={signedIn ? "visible" : "hidden"}
               >
-                  {"Music Summaries"}
+                  {"music summaries"}
                   </button>
           </div>
           <div>{DisplayData}</div>          

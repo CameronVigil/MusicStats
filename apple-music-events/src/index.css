@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-    font-family: "Chicago";
-    src: local("Chicago"), url("https://fonts.cdnfonts.com/s/17894/ChicagoFLF.woff") format("woff");
+    font-family: "ChicagoFLF";
+    src: local("ChicagoFLF"), url("https://fonts.cdnfonts.com/css/chicagoflf") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -13,14 +13,14 @@ html, body, #root {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0; /* light grey like copy paper */
-    font-family: "Chicago", "Courier New", monospace; 
+    font-family: "ChicagoFLF", "Courier New", monospace;
 }
 
 
 button {
     margin: 15px auto; /* Changed from '15px auto' */
     padding: 12px 24px;
-    margin-right:2px;
+    margin-right: 2px;
     font-size: 1rem;
     border: none;
     border-radius: 7px;
@@ -28,7 +28,7 @@ button {
     color: white;
     cursor: pointer;
     transition: background 0.2s ease;
-    font-family: "Chicago", "Courier New", monospace;
+    font-family: "ChicagoFLF", "Courier New", monospace;
 }
 .title{
     background-color: #00000031;
@@ -81,14 +81,14 @@ div {
     perspective: 300px;
     overflow: hidden;
     box-shadow: 0 2px 3px rgba(255, 255, 255, 0.05);
-    font-family: "Chicago", monospace;
+    font-family: "ChicagoFLF", monospace;
+    cursor:   default ; 
 }
     .flap-tile:hover {
         color: #444;
+        animation: flip .8s ease forwards;
     }
-    .titlespacing {
-        padding-right: 49px;
-    }
+
 .flap-top,
 .flap-bottom {
     position: absolute;
@@ -126,6 +126,10 @@ div {
     border-bottom: 1px solid #333;
     transform-origin: bottom;
     animation: flip 0.8s ease forwards;
+}
+
+.titlespacing {
+    padding-right: 49px;
 }
 
 @keyframes flip {
@@ -188,7 +192,7 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: lighter;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
@@ -196,7 +200,7 @@ div {
 
 .flap-divider {
     width: 100%;
-    height: 1px;
+    height: .51px;
     background: #222;
     border-radius: 2px;
     position: absolute;
