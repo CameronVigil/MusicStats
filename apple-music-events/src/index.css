@@ -1,181 +1,250 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: "Chicago";
+    src: local("Chicago"), url("https://fonts.cdnfonts.com/s/17894/ChicagoFLF.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0; /* light grey like copy paper */
-    font-family: 'Oswald', sans-serif;
-    color: #222;
+    font-family: "Chicago", "Courier New", monospace; 
 }
 
-h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
 
 button {
-    display: block;
-    margin: 15px auto;
+    margin: 15px auto; /* Changed from '15px auto' */
     padding: 12px 24px;
+    margin-right:2px;
     font-size: 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 7px;
     background-color: #222;
     color: white;
     cursor: pointer;
     transition: background 0.2s ease;
+    font-family: "Chicago", "Courier New", monospace;
+}
+.title{
+    background-color: #00000031;
+    color:black
 }
 
 button:hover {
     background-color: #444;
 }
+
 .hidden {
     display: none !important;
 }
 
 .visible {
-    display: block;
+    display: inline-block;
 }
-
 
 div {
     text-align: center;
 }
 
-
-
-//Heavy Rotation
-.heavyRotation {
-    font-family: "Athabasca Condensed ExtraBold", "Arial Narrow", sans-serif;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 2rem auto;
-    justify-content: center;
-}
-
-.heavyRotation h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-}
-
-.heavyRotation ul {
-    list-style: none;
-    padding: 0;
-}
-
-.heavyRotation li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.heavy-rotation-container {
+/* --- Splitflap Display --- */
+.grid-container {
+    display: grid;
+    column-count:3;
     flex-direction: column;
-    gap: 24px;
-    padding: 30px;
-    font-family: "Athabasca Condensed", sans-serif;
-    color: #100e0ed6;
-    
-    justify-content: center;
-    min-height: 100vh; /* ensures full page height */
-    width: 100%; /* ensures full page width */
-    box-sizing: border-box; /* keeps padding from breaking layout */
+    align-items: center;
+    background: #111;
+    border-radius: 10px;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
-.album-card {
+
+
+/* --- Flap Animation --- */
+.flap-row {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+
+.flap-tile {
     position: relative;
+    width: 16px;
+    height: 17px;
+    margin: 1px;
+    background: #000;
+    perspective: 300px;
+    overflow: hidden;
+    box-shadow: 0 2px 3px rgba(255, 255, 255, 0.05);
+    font-family: "Chicago", monospace;
+}
+    .flap-tile:hover {
+        color: #444;
+    }
+    .titlespacing {
+        padding-right: 49px;
+    }
+.flap-top,
+.flap-bottom {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    line-height: 12px;
+    text-align: center;
+    font-size: 0.8rem;
+    background: #000;
+    color: #fff;
+    border: 1px solid #222;
+}
+
+.flap-top {
+    top: 0;
+    border-bottom: 1px solid #333;
+}
+
+.flap-bottom {
+    bottom: 0;
+    border-top: 1px solid #333;
+}
+
+.flap-flip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    line-height: 14px;
+    text-align: center;
+    font-size: 1.1rem;
+    background: #000;
+    color: #fff;
+    border-bottom: 1px solid #333;
+    transform-origin: bottom;
+    animation: flip 0.8s ease forwards;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateX(0deg);
+    }
+
+    50% {
+        transform: rotateX(-90deg);
+    }
+
+    100% {
+        transform: rotateX(-180deg);
+        opacity: 0;
+    }
+}
+
+.board-container {
+    background: #0a0a0a;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    max-width: fit-content;
+    margin: 20px auto;
+    border: 3px solid #1a1a1a;
+}
+
+.board-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.board-row {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.flap-tile {
+    position: relative;
+    width: 18px;
+    height: 24px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 2px;
+    perspective: 400px;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+    .flap-tile:hover {
+        background: #444 ;
+    }
+.flap-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
-    border-radius: 12px;
-    overflow: hidden; /* important for rounded edges */
-    opacity: 0.9;
-    background: #f0f0f0; /* base color */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 20px;
-    max-width: 600px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: lighter;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-    /* gradient overlay (starts hidden) */
-    .album-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient( ellipse at top, rgba(240,240,240,0.9) 0%, rgba(240,240,240,0.6) 40%, transparent 100% );
-        opacity: 0;
-        transition: opacity 0.8s ease;
-        z-index: 0;
+.flap-divider {
+    width: 100%;
+    height: 1px;
+    background: #222;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+}
+
+.flap-tile.small {
+}
+
+    .flap-tile.small .flap-content {
     }
 
-    .album-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    .flap-tile.space {
+        background: transparent;
+        border: none;
+        box-shadow: none;
     }
 
-        .album-card:hover::before {
-            opacity: 1; /* fade the gradient in smoothly */
-        }
-
-    /* keep inner content above the overlay */
-    .album-card > * {
-        position: relative;
-        z-index: 1;
+    .flap-tile.separator {
+        background: #0a0a0a;
     }
 
+    .flap-tile.header {
+        background: #1a1a1a;
+    }
 
-.album-art {
-    border-radius: 8px;
-    margin-right: 20px;
+.album-tile {
+    width: 50px;
+    height: 38px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 2px;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.album-info {
-    flex: 1;
-}
+    .album-tile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.album-title {
-    font-size: 1.4rem;
-    margin: 0;
-    font-weight: 700;
-}
-
-.artist-name {
+.no-data {
+    text-align: center;
+    padding: 60px 20px;
     font-size: 1.1rem;
     color: #666;
-    margin: 6px 0 10px;
-}
-
-.album-details {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.album-details li {
-    margin-bottom: 4px;
-}
-
-.album-note {
-    margin-top: 10px;
-    font-style: italic;
-    color: #444;
-}
-
-.album-link {
-    display: inline-block;
-    margin-top: 12px;
-    color: black;
-    text-decoration: none;
-    font-weight: 400;
-    font-size:16px;
-}
-
-.album-link:hover {
-    text-decoration: underline;
 }

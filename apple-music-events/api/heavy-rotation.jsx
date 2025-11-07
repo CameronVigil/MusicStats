@@ -1,98 +1,43 @@
-﻿// heavy-rotation.jsx
-import React from "react";
+﻿import React from "react";
+import { motion } from "framer-motion";
 
+import SplitFlapBoard from "../src/components/split-flap-board";
 export default async function fetchHeavyRotation(developerToken, userToken) {
     try {
-        const res = await fetch(
-            `https://api.music.apple.com/v1/me/history/heavy-rotation?limit=10`,
-            {
-                headers: {
-                    Authorization: `Bearer ${developerToken}`,
-                    "Music-User-Token": userToken,
-                },
-            }
-        );
+        const res = await fetch(`https://api.music.apple.com/v1/me/history/heavy-rotation`, {
+            headers: {
+                Authorization: `Bearer ${developerToken}`,
+                "Music-User-Token": userToken,
+            },
+        });
 
         if (!res.ok) throw new Error(`Apple API Error: ${res.status}`);
         const data = await res.json();
         const items = data.data || [];
+
         console.log(items);
-        return (
-            <div className="heavy-rotation">
-                {items.map((item) => {
-                    const attr = item.attributes;
-                    if (!attr) return null;
-                    console.log("Attributes:" + item.attributes);
-                    const artworkUrl = attr.artwork?.url
-                        ?.replace("{w}", "300")
-                        ?.replace("{h}", "300");
-
-                    // Determine if it's an album or playlist
-                    const isPlaylist = item.type === "library-playlists";
-                    const typeLabel = isPlaylist ? "Playlist" : "Album";
-                    if (!isPlaylist){
-                        return (
-                            <div key={item.id} className="album-card">
-                                {artworkUrl && (
-                                    <img
-                                        src={artworkUrl}
-                                        alt={attr.name || "Artwork"}
-                                        className="album-art"
-                                    />
-                                )}
-
-                                <div className="album-info">
-                                    <h2 className="album-title">{attr.name}</h2>
-                                    <p className="artist-name">
-                                        {isPlaylist
-                                            ? attr.curatorName || "Apple Music"
-                                            : attr.artistName || "Unknown Artist"}
-                                    </p>
-
-                                    <ul className="album-details">
-                                        <li> {typeLabel}</li>
-
-                                        {attr.genreNames?.length > 0 && (
-                                            <li>
-                                                {attr.genreNames.join(", ")}
-                                            </li>
-                                        )}
-                                        {attr.releaseDate && (
-                                            <li>
-                                                 {attr.releaseDate}</li>
-                                        )}
-                                        {attr.recordLabel && (
-                                            <li>
-                                                {attr.recordLabel}</li>
-                                        )}
-                                        {attr.trackCount && (
-                                            <li>
-                                                {attr.trackCount}<strong> Tracks</strong> </li>
-                                        )}
-                                    </ul>
-
-                                    {attr.editorialNotes?.short && (
-                                        <p className="album-note">“{attr.editorialNotes.short}”</p>
-                                    )}
-
-                                    {attr.url && (
-                                        <a
-                                            href={attr.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="album-link"
-                                        >
-                                            View on Apple Music →
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        )
-                    };
-                })}
-            </div>
-        );
+                
+        return <SplitFlapBoard items={items} showAlbumArt={true} />;
+        
     } catch (err) {
-        console.error("Failed to fetch summaries:", err);
+        console.error("Failed to fetch heavy rotation:", err);
     }
+}
+
+function FlapText({ text }) {
+    return (
+        <div className={`flap-row`}>
+            {[...text].map((char, i) => (
+                <motion.div
+                    key={i}
+                    className="flap-tile"
+                    initial={{ rotateX: 90, opacity: 0 }}
+                    animate={{ rotateX: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.015, duration: 0.15 }}
+                >
+                    {char}
+                </motion.div>
+            ))}
+        </div>
+    );
 }
