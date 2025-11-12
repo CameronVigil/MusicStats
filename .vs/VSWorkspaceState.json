@@ -1,13 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\apple-music-events",
-    "\\apple-music-events\\api",
-    "\\apple-music-events\\apple-token-gen",
-    "\\apple-music-events\\src",
-    "\\apple-music-events\\src\\components",
-    "\\apple-music-events\\src\\utils"
+    "\\.github",
+    "\\.github\\workflows",
+    "\\music-stats",
+    "\\music-stats\\api",
+    "\\music-stats\\apple-token-gen",
+    "\\music-stats\\public",
+    "\\music-stats\\src"
   ],
-  "SelectedNode": "\\apple-music-events\\apple-token-gen\\generateToken.js",
+  "SelectedNode": "\\music-stats\\src\\components",
   "PreviewInSolutionExplorer": false
 }

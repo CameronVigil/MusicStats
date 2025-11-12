@@ -1,4 +1,5 @@
 import React from "react";
+import TopSongsBoard from "../src/split-board/top-songs-board";
 
 export default async function fetchMusicSummaries(developerToken, userToken) {
     try {
@@ -26,40 +27,12 @@ export default async function fetchMusicSummaries(developerToken, userToken) {
             const topAlbums = views['top-albums']?.data || [];
 
             console.log("Top Artists:", topArtists);
-            console.log("Top Songs:", topSongs);
+            console.log("Top Songs:", topSongs.slice(0, 10));
             console.log("Top Albums:", topAlbums);
-
-            // Return formatted data
-            return (
-                <div className="board-container">
-                    <div className="board-content">
-                        <div style={{ color: 'white', textAlign: 'left', padding: '20px' }}>
-                            <h2>Top Artists</h2>
-                            {topArtists.map((item, idx) => (
-                                <div key={idx}>
-                                    {idx + 1}. {item.attributes?.name || 'Unknown'}
-                                </div>
-                            ))}
-
-                            <h2 style={{ marginTop: '20px' }}>Top Songs</h2>
-                            {topSongs.map((item, idx) => (
-                                <div key={idx}>
-                                    {idx + 1}. {item.attributes?.name || 'Unknown'} - {item.attributes?.artistName || 'Unknown'}
-                                </div>
-                            ))}
-
-                            <h2 style={{ marginTop: '20px' }}>Top Albums</h2>
-                            {topAlbums.map((item, idx) => (
-                                <div key={idx}>
-                                    {idx + 1}. {item.attributes?.name || 'Unknown'} - {item.attributes?.artistName || 'Unknown'}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            );
-
-
+            console.log("Top Songs data:", topSongs[0]?.relationships?.song?.data?.[0].attributes.artistName);
+            //const songData = item?.relationships?.song?.data?.[0];
+            //const attr = songData?.attributes;
+            return <TopSongsBoard items={topSongs.slice(0,10)} showAlbumArt={true} />;            
         } catch (err) {
             console.error("Failed to return music summaries:", err);
             return (
@@ -76,4 +49,22 @@ export default async function fetchMusicSummaries(developerToken, userToken) {
         console.error("Failed to fetch music summaries:", err);
         return <div className="no-data">Failed to load summaries</div>;
     }
+}
+
+function FlapText({ text }) {
+    return (
+        <div className={`flap-row`}>
+            {[...text].map((char, i) => (
+                <motion.div
+                    key={i}
+                    className="flap-tile"
+                    initial={{ rotateX: 90, opacity: 0 }}
+                    animate={{ rotateX: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.015, duration: 0.15 }}
+                >
+                    {char}
+                </motion.div>
+            ))}
+        </div>
+    );
 }

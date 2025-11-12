@@ -149,12 +149,18 @@ export default function App() {
 
   const getMusicSummaries = async () => {
       try {
-        setDisplayData(null);
+          setDisplayData(<div className="board-container">
+              <div className="board-content">
+                  <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                      Loading...
+                  </div>
+              </div>
+          </div>);
           console.log("Retrieving summaries from API.");
-          const res = await fetchMusicSummaries(developerToken.current, userToken.current);
+          const data = await fetchMusicSummaries(developerToken.current, userToken.current);
           console.log("Retrieved summaries from API.");
-          console.log("Summaries data:", res);
-          setDisplayData(res.data);
+          console.log("Summaries data:", data);
+          setDisplayData(data);
     } catch (err) {
         console.error("Sign-in or fetch failed:", err);
     }
