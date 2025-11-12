@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import { motion } from "framer-motion";
+import SplitFlapBoard from "../src/split-board/split-flap-board";
 
-import SplitFlapBoard from "../src/components/split-flap-board";
 export default async function fetchHeavyRotation(developerToken, userToken) {
     try {
         const res = await fetch(`https://api.music.apple.com/v1/me/history/heavy-rotation`, {
