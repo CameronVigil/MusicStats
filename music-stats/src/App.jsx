@@ -239,7 +239,7 @@ export default function App() {
                   onClick={getMusicSummaries}
                   className={signedIn ? "visible" : "hidden"}
               >
-                  {"music summaries"}
+                  {"top songs of last month"}
                   </button>
           </div>
           <div>{DisplayData}</div>          
