@@ -13,15 +13,19 @@ features
 -  **Modern React frontend** | React is used for a clean, responsive interface.
 
 
-<img width="1260" height="544" alt="image" src="https://github.com/user-attachments/assets/85ea193e-f7ee-4fd3-963a-b2852c974285" />
-
-
 thanks for checking out my app, always open to feedback! :)
 
 
 inspired by https://github.com/michellexliu/receiptify
 
 
+
+
+
+<img width="1260" height="544" alt="image" src="https://github.com/user-attachments/assets/85ea193e-f7ee-4fd3-963a-b2852c974285" />
+
+
+https://github.com/user-attachments/assets/4edeea0b-d4f7-43e3-ab3f-effef6787746
 
 
 
